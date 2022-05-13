@@ -62,7 +62,7 @@ SELECT * FROM Names
 SELECT * FROM AudioTraits
 SELECT * FROM Users
 
---DELETE FROM Users WHERE UserId=3000;
+--DELETE FROM Users WHERE UserId=4000;
 --DELETE FROM Audio WHERE AudioId=1000;
 
 --SELECT * FROM Audio
@@ -76,3 +76,7 @@ SELECT * FROM Users
 --DROP TABLE AudioTraits;
 --DROP TABLE Names;
 --DROP TABLE Audio;
+
+-- Delete Columns
+
+--DELETE FROM Users WHERE UserId=4002;
