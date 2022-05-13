@@ -41,7 +41,7 @@ steps:
     SonarQube: 'http://20.231.34.160:9000/'
     scannerMode: 'CLI'
     configMode: 'manual'
-    cliProjectKey: '756cb52100e9340b79dd9d3037b0f7f5ef528ae4'
+    cliProjectKey: 'NaamKaran-pipeline_NaamKaran-pipeline_AYC-onptQp_8xiKK5daZ'
 
 # Run Code Analysis task
 - task: SonarQubeAnalyze@5
