@@ -80,6 +80,9 @@ class insert_name(Resource):
             print(input_json["query"])
             output = db_interface(input_json)
             data["status"] = "Processed"
+            input_json = {"query": "SELECT IDENT_CURRENT('Names')", "is_resp_expected": True}
+            output = db_interface(input_json)
+            data["Id"] = int(output["data"][0][0])
         except Exception as e:
             data["status"] = "Failed"
             data["exception"] = str(e)
@@ -124,6 +127,9 @@ class insert_audio(Resource):
             print(input_json["query"])
             output = db_interface(input_json)
             data["status"] = "Processed"
+            input_json = {"query": "SELECT IDENT_CURRENT('Audio')", "is_resp_expected": True}
+            output = db_interface(input_json)
+            data["Id"] = int(output["data"][0][0])
         except Exception as e:
             data["status"] = "Failed"
             data["exception"] = str(e)
