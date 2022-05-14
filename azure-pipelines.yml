@@ -34,3 +34,19 @@ steps:
     pip install pytest pytest-azurepipelines
     pytest
   displayName: 'pytest'
+
+# Prepare Analysis Configuration task
+- task: SonarQubePrepare@5
+  inputs:
+    SonarQube: 'http://20.231.34.160:9000/'
+    scannerMode: 'CLI'
+    configMode: 'manual'
+    cliProjectKey: 'NaamKaran-pipeline_NaamKaran-pipeline_AYC-onptQp_8xiKK5daZ'
+
+# Run Code Analysis task
+- task: SonarQubeAnalyze@5
+
+# Publish Quality Gate Result task
+- task: SonarQubePublish@5
+  inputs:
+    pollingTimeoutSec: '300'

@@ -20,44 +20,63 @@
 --    AudioType char
 --);
 
+--CREATE TABLE AudioTraits (
+--    TraitId int NOT NULL PRIMARY KEY IDENTITY(3000,1),
+--    Language varchar(50) NOT NULL,
+--    Locale varchar(10) NOT NULL,
+--    Gender varchar(10) NOT NULL,
+--    VoiceName varchar(100) NOT NULL
+--);
+
 --CREATE TABLE Users (
---    UserId int NOT NULL PRIMARY KEY IDENTITY(3000,1),
+--    UserId int NOT NULL PRIMARY KEY IDENTITY(4000,1),
 --    LastName varchar(255) NOT NULL,
 --    FirstName varchar(255) NOT NULL,
 --    MiddleName varchar(255),
 --    Pswd varchar(255) NOT NULL,
 --    NameId int FOREIGN KEY REFERENCES Names(NameId),
---    Gender char NOT NULL,
+--    Gender varchar(10) NOT NULL,
 --    Nationality varchar(50) NOT NULL,
 --    Language varchar(50) NOT NULL,
+--    TraitId int FOREIGN KEY REFERENCES AudioTraits(TraitId),
 --    UseChoice char,
 --    Pace char
 --);
 
 -- Test DB Features
 
---INSERT INTO Audio(AudioB64)
+--INSERT INTO Audio (AudioB64)
 --VALUES (CONVERT(varbinary(max), 'Hello_Music'));
 
 --INSERT INTO Names (PrefName, AudioId, AudioType)
 --VALUES ('Prabin', 1000, 'A');
 
---INSERT INTO Users (LastName, FirstName, MiddleName, Pswd, NameId, Gender, Nationality, Language, UseChoice, Pace)
---VALUES ('Rath', 'Prabin', 'Kumar', 'password', 2000, 'M', 'India', 'English', 'Y', 'F');
+--INSERT INTO AudioTraits (Language, Locale, Gender, VoiceName)
+--VALUES ('English (India)', 'en-IN', 'Male', 'en-IN-PrabhatNeural');
+
+--INSERT INTO Users (LastName, FirstName, MiddleName, Pswd, NameId, Gender, Nationality, Language, TraitId, UseChoice, Pace)
+--VALUES ('Rath', 'Prabin', 'Kumar', 'password', 2000, 'Male', 'India', 'English', 3000, 'Y', 'F');
 
 SELECT * FROM Audio
 SELECT * FROM Names
+SELECT * FROM AudioTraits
 SELECT * FROM Users
 
---DELETE FROM Users WHERE UserId=3000;
+--DELETE FROM Users WHERE UserId=4000;
 --DELETE FROM Audio WHERE AudioId=1000;
 
 --SELECT * FROM Audio
 --SELECT * FROM Names
+--SELECT * FROM AudioTraits
 --SELECT * FROM Users
 
 -- Clean the DB
 
 --DROP TABLE Users;
+--DROP TABLE AudioTraits;
 --DROP TABLE Names;
 --DROP TABLE Audio;
+
+-- Delete Columns
+
+--DELETE FROM Users WHERE UserId=4002;
