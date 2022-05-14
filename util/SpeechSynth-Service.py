@@ -97,15 +97,18 @@ class SpeechSynth:
 
 ### TESTING
 # audio file test
-name = "Denver"
-filepath = config.LOCAL_AUDIO_PATH+name+'.mp3'
-filename = name+'.mp3'
-s = SpeechSynth('en-IN-PrabhatNeural',filepath)
-# audio file test
-s.synthesize_text_to_audio_file(name)
-store = BlobStoreService()
-store.upload_service(filename)
+# name = "Atchyutha"
+# filepath = config.LOCAL_AUDIO_PATH+name+'.mp3'
+# filename = name+'.mp3'
+# s = SpeechSynth('en-IN-PrabhatNeural',filepath)
 
+# # audio file test
+# s.synthesize_text_to_audio_file(name)
+# store = BlobStoreService()
+# store.upload_service(filename)
+# print(store.list_files_in_blobstore())
+# input('go ahead?')
+# store.download_service(filename)
 
 # s.encode_b64_mp3()
 # s = SpeechSynth('en-IN-PrabhatNeural')
