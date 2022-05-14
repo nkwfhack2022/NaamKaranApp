@@ -29,7 +29,7 @@
 --);
 
 --CREATE TABLE Users (
---    UserId int NOT NULL PRIMARY KEY IDENTITY(4000,1),
+--    UserId varchar(50) NOT NULL PRIMARY KEY,
 --    LastName varchar(255) NOT NULL,
 --    FirstName varchar(255) NOT NULL,
 --    MiddleName varchar(255),
@@ -54,13 +54,16 @@
 --INSERT INTO AudioTraits (Language, Locale, Gender, VoiceName)
 --VALUES ('English (India)', 'en-IN', 'Male', 'en-IN-PrabhatNeural');
 
---INSERT INTO Users (LastName, FirstName, MiddleName, Pswd, NameId, Gender, Nationality, Language, TraitId, UseChoice, Pace)
---VALUES ('Rath', 'Prabin', 'Kumar', 'password', 2000, 'Male', 'India', 'English', 3000, 'Y', 'F');
+INSERT INTO AudioTraits (Language, Locale, Gender, VoiceName)
+VALUES ('English (India)', 'en-IN', 'Female', 'en-IN-NeerjaNeural');
 
-SELECT * FROM Audio
-SELECT * FROM Names
-SELECT * FROM AudioTraits
-SELECT * FROM Users
+--INSERT INTO Users (UserId, LastName, FirstName, MiddleName, Pswd, NameId, Gender, Nationality, Language, TraitId, UseChoice, Pace)
+--VALUES ('u791553', 'Rath', 'Prabin', 'Kumar', 'password', 2000, 'Male', 'India', 'English', 3000, 'Y', 'F');
+
+--SELECT * FROM Audio
+--SELECT * FROM Names
+--SELECT * FROM AudioTraits
+--SELECT * FROM Users
 
 --DELETE FROM Users WHERE UserId=4000;
 --DELETE FROM Audio WHERE AudioId=1000;

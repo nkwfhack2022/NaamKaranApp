@@ -1,8 +1,12 @@
 import requests
 import json
 
-# url = 'http://127.0.0.1:5000/insert_user'
-# payload = {"LastName": "'Das'", 
+base_url = "https://naamkaran-db-gateway.azurewebsites.net"
+# base_url = "http://127.0.0.1:5000"
+
+# url = base_url + '/insert_user'
+# payload = {"UserId": "'u791554'",
+#            "LastName": "'Das'", 
 #            "FirstName": "'Prabeen'", 
 #            "MiddleName": "''", 
 #            "Pswd": "'password'", 
@@ -16,12 +20,54 @@ import json
 # x = requests.post(url, json = payload)
 # print(x.text)
 
-url = 'https://naamkaran-db-gateway.azurewebsites.net/get_user'
-payload = {"UserId": 4003, "option": "select"}
+# url = base_url + '/get_user'
+# payload = {"UserId": "'u791553'", "option": "select"}
+# x = requests.post(url, json = payload)
+# print(x.text)
+
+# url = base_url + '/get_user'
+# payload = {"option": "all"}
+# x = requests.post(url, json = payload)
+# print(x.text)
+
+# url = base_url + '/insert_name'
+# payload = {"PrefName": "'Aswin'",
+#            "AudioId": 1001,
+#            "AudioType": "'R'"}
+# x = requests.post(url, json = payload)
+# print(x.text)
+
+# url = base_url + '/get_name'
+# payload = {"NameId": 2001, "option": "select"}
+# x = requests.post(url, json = payload)
+# print(x.text)
+
+# url = base_url + '/get_name'
+# payload = {"option": "all"}
+# x = requests.post(url, json = payload)
+# print(x.text)
+
+# url = base_url + '/insert_audio'
+# payload = {"AudioB64": "'Ashwin'"}
+# x = requests.post(url, json = payload)
+# print(x.text)
+
+# url = base_url + '/get_audio'
+# payload = {"AudioId": 1001, "option": "select"}
+# x = requests.post(url, json = payload)
+# print(x.text)
+
+# url = base_url + '/get_audio'
+# payload = {"option": "all"}
+# x = requests.post(url, json = payload)
+# print(x.text)
+
+url = base_url + '/get_audio_traits'
+payload = {"TraitId": 3000, "option": "select"}
 x = requests.post(url, json = payload)
 print(x.text)
 
-url = 'https://naamkaran-db-gateway.azurewebsites.net/get_user'
+url = base_url + '/get_audio_traits'
 payload = {"option": "all"}
 x = requests.post(url, json = payload)
 print(x.text)
