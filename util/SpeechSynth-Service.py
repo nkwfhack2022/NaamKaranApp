@@ -1,4 +1,6 @@
 import base64
+import os
+from blob_store_service import BlobStoreService
 try:
     import azure.cognitiveservices.speech as speechsdk
     import config
@@ -27,7 +29,7 @@ class SpeechSynth:
 
         
     # Get audio as wave file or mp3 file
-    def synthesize_text_to_audio_file(self,pref_name:str):
+    def synthesize_text_to_audio_file(self, pref_name:str):
 
         # adding additional configuration for mp3 file
         if '.mp3' in self.file_name:
@@ -58,18 +60,18 @@ class SpeechSynth:
         if speech_synthesis_result.reason == speechsdk.ResultReason.SynthesizingAudioCompleted:
             print("Speech synthesized for text [{}]".format(pref_name))
             audio_data_stream = speechsdk.AudioDataStream(speech_synthesis_result)
+            
+            audio_data_stream.position = 0
 
-            # audio_data_stream.position = 0
-
-            # # Reads data from the stream
-            # audio_buffer = bytes(16000)
-            # total_size = 0
-            # filled_size = audio_data_stream.read_data(audio_buffer)
-            # while filled_size > 0:
-            #     print("{} bytes received.".format(filled_size))
-            #     total_size += filled_size
-            #     filled_size = audio_data_stream.read_data(audio_buffer)
-            # print("Totally {} bytes received for text [{}].".format(total_size, pref_name))
+            # Reads data from the stream
+            audio_buffer = bytes(16000)
+            total_size = 0
+            filled_size = audio_data_stream.read_data(audio_buffer)
+            while filled_size > 0:
+                print("{} bytes received.".format(filled_size))
+                total_size += filled_size
+                filled_size = audio_data_stream.read_data(audio_buffer)
+            print("Totally {} bytes received for text [{}].".format(total_size, pref_name))
             
             audio_data_stream.position = 0
             return audio_data_stream
@@ -81,13 +83,31 @@ class SpeechSynth:
             if cancellation_details.reason == speechsdk.CancellationReason.Error:
                 print("Error details: {}".format(cancellation_details.error_details))
 
+    def encode_b64_mp3(self):
+        with open('audio_files/name_test1.wav','rb') as f:
+            stream = base64.encodebytes(f.read())
+            print(len(stream))
+            print(type(stream))
+        return stream
+        
+
+    def decode_b64_mp3(self,stream:bytes):
+        pass
         
 
 ### TESTING
 # audio file test
-# s = SpeechSynth('en-IN-PrabhatNeural',r'audio_files\\name_test1.mp3')
-# # audio file test
-# s.synthesize_text_to_audio_file('Rabindranath Sahoo')
+name = "Denver"
+filepath = config.LOCAL_AUDIO_PATH+name+'.mp3'
+filename = name+'.mp3'
+s = SpeechSynth('en-IN-PrabhatNeural',filepath)
+# audio file test
+s.synthesize_text_to_audio_file(name)
+store = BlobStoreService()
+store.upload_service(filename)
+
+
+# s.encode_b64_mp3()
 # s = SpeechSynth('en-IN-PrabhatNeural')
 # # audio file test
 # s.synthesize_text_to_bytes('Rabindranath Sahoo')
