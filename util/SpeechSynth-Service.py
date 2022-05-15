@@ -39,8 +39,7 @@ class SpeechSynth:
         speech_synthesizer = speechsdk.SpeechSynthesizer(speech_config=self.speech_config, audio_config=self.file_config)
         
         speech_synthesis_result = speech_synthesizer.speak_text_async(pref_name).get()
-        print(speech_synthesis_result)
-
+       
         # validation - logs
         if speech_synthesis_result.reason == speechsdk.ResultReason.SynthesizingAudioCompleted:
             print("Speech synthesized for text [{}], and the audio was saved to [{}]".format(pref_name, self.file_name))
@@ -93,6 +92,7 @@ class SpeechSynth:
     def decode_b64_mp3(self,stream:bytes):
         pass
 
+## MAIN
 def text_synthesize_upload(voicename:str, pref_name:str, filename:str):
             
     file_path = config.LOCAL_AUDIO_PATH+filename+'.mp3'

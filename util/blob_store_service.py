@@ -13,27 +13,32 @@ class BlobStoreService:
     def getfiles(self, dir:str, file_name:str):
         with os.scandir(dir) as entries:
             for entry in entries:
-                if (entry.is_file() and (entry.name==file_name)):
+                print(entry.name)
+                if (entry.is_file() and (entry.name.startswith(file_name))):
                     yield entry
 
     def uploadfiles(self, files, connection_str:str, container_name:str):
         container_client = ContainerClient.from_connection_string(connection_str, container_name)
-        
-        for file in files:
-            blob_client = container_client.get_blob_client(file.name)
-            with open(file.path,"rb") as data:
-                blob_client.upload_blob(data)
-                print('uploaded to blob storage: ',file.path)
-                os.remove(file.path)
+        try:
+            for file in files:
+                blob_client = container_client.get_blob_client(file.name)
+                print(file.path)
+                with open(file.path,"rb") as data:
+                    blob_client.upload_blob(data)
+                    print('uploaded to blob storage: ',file.path)
+                    os.remove(file)
+        except Exception as ex:
+            print(ex)
          
    
                 
     def upload_service(self, file_name):
         try:
             audio_file = self.getfiles(config.LOCAL_AUDIO_PATH, file_name)
-            print(audio_file)
+                
             print('uploading file.. ', file_name)
             self.uploadfiles(audio_file, config.AZURE_STORAGE_CONNECTION_STRING , config.AUDIO_CONTAINER_NAME)
+            
         except Exception as ex:
             print(ex)
             pass
