@@ -1,0 +1,28 @@
+<div class="row" style="height: 100%;">
+    <div class="col-4 p-0 m-0" style="border: 1px solid green;">
+        Logo
+    </div>
+    <div class="col  p-0 m-0">
+        <div class="row">
+            <div class="col-8 text-center justify-content-center align-items-center">
+                <h2>Name Pronounciation Tool</h2>
+            </div>
+            <div class="col">
+                <div class="row">
+                    <div class="col">
+                        <h5 *ngIf="uid.length>0" style="width: 1vh;">{{uid}}</h5>
+                    </div>
+                    <div *ngIf="uid.length>0" class="col " style="width: 1vh;">
+                        <h5 (click)="logOut()" style="cursor: pointer;" class="justify-content-start">Log Out</h5>
+                    </div>
+                    <div *ngIf="uid.length==0 " class="col " style="width: 1vh;">
+                        <h5 (click)="logIn(status)" style="cursor: pointer;" class="justify-content-start">{{status}}</h5>
+                    </div>
+                </div>
+               
+            </div>
+           
+        </div>
+       
+    </div>
+</div>

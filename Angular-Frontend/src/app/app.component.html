@@ -1,0 +1,32 @@
+<div class="container-fluid" style="border: 1px solid red; height: 100vh">
+  <div class="row" style="border: 1px solid green; height: 10vh">
+    <app-header></app-header>
+  </div>
+
+  <div class="row" style="border: 1px solid blue; height: 80vh">
+    <div class="col" style="border: 1px solid rgb(230, 53, 188); height: 100%">
+      <div
+        class="card m-5 mt-1"
+        style="height: 100%"
+        [ngStyle]="{ filter: blur }"
+      >
+        <div class="card-header">#title</div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-1"></div>
+            <div class="col-10">
+              <router-outlet></router-outlet>
+            </div>
+
+            <div class="col-1"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" style="border: 1px solid black; height: 10vh">
+    <app-footer></app-footer>
+  </div>
+  <app-record-popup></app-record-popup>
+</div>

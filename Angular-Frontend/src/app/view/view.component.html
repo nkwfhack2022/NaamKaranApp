@@ -1,0 +1,83 @@
+
+<head>
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+</head>
+
+
+                <div class="card text-center " >
+                    <div class="card-header ">
+                        <div class="row">
+                            <div class="col-2">
+
+                            </div>
+                            <div class="col-8">
+                                <div class="input-group ">
+                                    <input placeholder="Enter Name!" type="text" [(ngModel)]="typedName" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="typedName.length" class="" style="height: 30vh; overflow-y:scroll; overflow-x: hidden;"> 
+                            <div  class="row my-1 " *ngFor="let suggestedName of suggestedNames" >
+                                <div class="col-2">
+    
+                                </div> 
+                                <div class="col-8  " >
+                                    <div class="row mx-0" style=" border: 1px solid #ced4da;  border-radius: 0.25rem; background-color: white;">
+                                        <div class="col-2 py-2" style=" border-right: 2px solid #ced4da;">
+                                            <button class="btn btn-primary " >Play</button>
+                                        </div>
+                                        <div class="col-4 " style="cursor: pointer; ">
+                                            <h3 class="py-2" style="font-size: 1.5vw;"> {{suggestedName.name}}</h3>
+                                        </div>
+                                        <div class="col-4" style="cursor: pointer; ">
+                                            <h3 class="text-muted py-2" style="font-size: 1.5vw;"> {{suggestedName.phonetic}}</h3>
+                                        </div>
+                                        <div class="col-2  py-2" style=" border-left: 2px solid #ced4da;">
+                                            <div class="row m-0 p-0">
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input " type="checkbox" role="switch" id="flexSwitchCheckDefault" />
+                                                    <label class="form-check-label p-0 m-0" style="font-size: 1vw;" for="flexSwitchCheckDefault">Slow</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div> 
+                            </div>
+                            <div *ngIf="suggestedNames.length==0" class="row my-1">
+                                <div class="col-2">
+    
+                                </div> 
+                                <div class="col-8">
+                                    <div class="input-group " >
+                                        <div class="text-start" style=" cursor: pointer; background-color: white; width: 88%;">
+                                            <h5 class="px-3 pt-2 text-muted"> Name Not Found. Please Record the name.</h5>
+                                        </div>
+                                    </div>
+                                </div> 
+                            </div>
+                        </div>
+                       
+                       
+                    </div>
+                    <div *ngIf="typedName.length"  class="card-footer text-muted">
+                      <div class="row">
+                          <div class="col-2"></div>
+                          <div class="col-8">
+                            <button (click) = "openPopUp()" data-toggle="modal" data-target="#exampleModalCenter" class="btn btn-primary ">Record name</button>
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                
+   <div *ngIf="recordId" class="row mt-4 text-center justify-content-center">
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">Record</h5>
+          
+          <button *ngIf="!isPlaying" (click)="playRecord()" class="btn btn-primary">Play Record</button>
+          <button *ngIf="isPlaying" (click)="playRecord()" class="btn btn-primary">Playing</button>
+        </div>
+      </div>
+   </div>        
