@@ -89,29 +89,29 @@ class SpeechSynth:
             print(len(stream))
             print(type(stream))
         return stream
-        
-
+    
     def decode_b64_mp3(self,stream:bytes):
         pass
 
-    def text_synthesize_upload(self, voicename:str, pref_name:str, filename:str):
+def text_synthesize_upload(voicename:str, pref_name:str, filename:str):
             
-            file_path = config.LOCAL_AUDIO_PATH+filename+'.mp3'
-            s = SpeechSynth(voicename, file_path)
-            s.synthesize_text_to_audio_file(pref_name)
-            
-            store = BlobStoreService()
-            store.upload_service(filename)
-            print(store.list_files_in_blobstore())
+    file_path = config.LOCAL_AUDIO_PATH+filename+'.mp3'
+    s = SpeechSynth(voicename, file_path)
+    s.synthesize_text_to_audio_file(pref_name)
 
-            return filename
+    store = BlobStoreService()
+    store.upload_service(filename)
+    print(store.list_files_in_blobstore())
 
+    return r"https://wfhck2022nkstorage1.blob.core.windows.net/audiofiles/"+filename+".mp3"
+
+print(text_synthesize_upload('en-IN-PrabhatNeural','Reggie', 'reg-1'))
 
         
 
 ### TESTING
 # audio file test
-# name = "Atchyutha"
+# name = "Prabina"
 # filepath = config.LOCAL_AUDIO_PATH+name+'.mp3'
 # filename = name+'.mp3'
 # s = SpeechSynth('en-IN-PrabhatNeural',filepath)
@@ -119,7 +119,7 @@ class SpeechSynth:
 # # audio file test
 # s.synthesize_text_to_audio_file(name)
 # store = BlobStoreService()
-# store.upload_service(file_name)
+# store.upload_service(filename)
 # print(store.list_files_in_blobstore())
 # input('go ahead?')
 # store.download_service(filename)
