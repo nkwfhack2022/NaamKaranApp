@@ -1,7 +1,7 @@
-import audioop
 import os
-from azure.storage.blob import ContainerClient, BlobServiceClient
+from azure.storage.blob import ContainerClient
 import config
+
 class BlobStoreService:
 
     def getfiles(self, dir:str):
@@ -13,7 +13,6 @@ class BlobStoreService:
     def getfiles(self, dir:str, file_name:str):
         with os.scandir(dir) as entries:
             for entry in entries:
-                print(entry.name)
                 if (entry.is_file() and (entry.name.startswith(file_name))):
                     yield entry
 
@@ -22,7 +21,6 @@ class BlobStoreService:
         try:
             for file in files:
                 blob_client = container_client.get_blob_client(file.name)
-                print(file.path)
                 with open(file.path,"rb") as data:
                     blob_client.upload_blob(data)
                     print('uploaded to blob storage: ',file.path)
@@ -35,7 +33,6 @@ class BlobStoreService:
     def upload_service(self, file_name):
         try:
             audio_file = self.getfiles(config.LOCAL_AUDIO_PATH, file_name)
-                
             print('uploading file.. ', file_name)
             self.uploadfiles(audio_file, config.AZURE_STORAGE_CONNECTION_STRING , config.AUDIO_CONTAINER_NAME)
             
