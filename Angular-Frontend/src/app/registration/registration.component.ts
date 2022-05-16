@@ -19,7 +19,7 @@ export class RegistrationComponent implements OnInit {
     Gender:"",
     Nationality:"",
     Pswd:"",
-    NameId: 2000, 
+    NameId: 0, 
     TraitId:"",
     UseChoice:"Y",
     Pace:"S"
@@ -36,15 +36,13 @@ export class RegistrationComponent implements OnInit {
       let lanSet = new Set();
       this.traits = res.result;
       for(let i=0; i<res.result.length;i++) {
-        lanSet.add(res.result[0][1])
-        let val =  res.result[0][1].split(" ");
-        
-        if(val.length>1) {
-          if(val[1].includes("(")) {
-            val[1] = val[1].substring(1, val[1].length-1);
-            natSet.add(val[1])
+        lanSet.add(res.result[i][1])
+        let str = res.result[i][1];
+        let val = str.substring(str.indexOf(' ') + 1);
+          if(val.includes("(")) {
+            val = val.substring(1, val.length-1);
+            natSet.add(val)
           }
-        }
       }
       for(let nat of natSet) {
         this.nationality.push(nat)
@@ -69,6 +67,8 @@ export class RegistrationComponent implements OnInit {
     this.user.Language = this.user.Language.split(" ")[0];
     console.log(this.user)
     this.addQuote();
+    this.signUPServive.saveTraitId(this.user.TraitId);
+    window.localStorage.setItem("traitId", this.user.TraitId);
     this.signUPServive.register(this.user).subscribe((res) =>{
       console.log(res)
       this.route.navigate(['/login'])

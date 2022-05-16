@@ -14,7 +14,6 @@ import { RegistrationComponent } from './registration/registration.component';
 import { RecordPopupComponent } from './record-popup/record-popup.component';
 import { LoginSignupService } from './login-signup.service';
 import { RecordApiService } from './record-api.service';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +29,7 @@ import { RecordApiService } from './record-api.service';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [AudioRecordingService, LoginSignupService, RecordApiService],
   bootstrap: [AppComponent]

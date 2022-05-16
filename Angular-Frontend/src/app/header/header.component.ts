@@ -17,9 +17,10 @@ export class HeaderComponent implements OnInit {
       this.status = "Login";
     } else if(route.url.includes('search-name')) {
       this.status = "Log Out"
+    } else {
+      this.status = "Login"
     }
     this.loginService.updateUid().subscribe((uid) => {
-      console.log(uid)
       this.uid = uid;
     });
   }

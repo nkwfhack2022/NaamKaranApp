@@ -14,6 +14,7 @@ export class LogInOutComponent implements OnInit {
     option: "select"
   }
   password:any;
+  tID:any;
  
   constructor(private logInService: LoginSignupService, private route:Router) { 
     this.user.UserId = "";
@@ -25,6 +26,8 @@ export class LogInOutComponent implements OnInit {
   logIn() {
     this.user.UserId = "'"+this.user.UserId+"'";
     this.logInService.login(this.user ).subscribe((res) =>{
+      console.log(res)
+      window.localStorage.setItem("traitId", res.result[0][9]);
       if(res.result[0][4] != this.password) {
         alert("Please enter correct password");
         return;
@@ -33,5 +36,6 @@ export class LogInOutComponent implements OnInit {
       this.logInService.updateUID(this.user.UserId);
     })
   }
+
 
 }

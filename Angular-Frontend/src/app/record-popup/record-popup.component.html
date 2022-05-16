@@ -14,17 +14,32 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content" style="border-radius: 30px;">
             <div class="modal-header" style="word-break: break-all;">
-                <h5 class="modal-title" id="exampleModalLongTitle">Please Record Your Name</h5>
+                <h5 class="modal-title" id="exampleModalLongTitle">Record Your Name</h5>
                 <button class="close" type="button" (click)="closePopUp()" data-dismiss="modal" aria-label="close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <div class="row text-center justify-content-center">
-                    <input *ngIf="!isAudioRecording && !playAudio" (click)="startAudioRecording()" class="btn btn-primary"  value="Record">
-                    <input *ngIf="isAudioRecording && !playAudio" (click)="stopAudioRecording()" class="btn btn-primary"  value="Stop Record">
+                <div class="row ">
+                    <div class="col-4"></div>
+                    <div *ngIf="!isAudioRecording && !playAudio" (click)="startAudioRecording()" class="col-4 text-center justify-content-center" 
+                    style="border: 2px solid #ced4da; border-radius: 10px; cursor: pointer; background-color:#ced4da ;">
+                        <img   style="cursor: pointer; border-radius: 10px;" 
+                     src="./.././../assets/mic.png" alt="" srcset=""
+                      width="50px" height="50px">
+                    </div>
+                    <div *ngIf="isAudioRecording && !playAudio" (click)="stopAudioRecording()" class="col-4 text-center justify-content-center" 
+                    style="border: 2px solid #ced4da; border-radius: 10px; cursor: pointer; background-color:#ced4da">
+                        <img   style="cursor: pointer; border-radius: 10px;" 
+                     src="./.././../assets/record_voice.png" alt="" srcset=""
+                      width="50px" height="50px">
+                    </div>
+                    <div class="col-4"></div>
+                    <!-- <input *ngIf="!isAudioRecording && !playAudio" (click)="startAudioRecording()" class="btn btn-primary"  value="Record"> -->
+                    
+                    <!-- <input *ngIf="isAudioRecording && !playAudio" (click)="stopAudioRecording()" class="btn btn-primary"  value="Stop Record"> -->
                     <!-- <button *ngIf="!isAudioRecording && !playAudio" (click)="startAudioRecording()" class="btn btn-primary" >Record</button> -->
-                    <audio *ngIf="audioBlobUrl && playAudio" controls controlsList="nodownload noplaybacktrack">
+                    <audio *ngIf="audioBlobUrl && playAudio" controls controlsList="nodownload noplaybackrate">
                         <source [src]="audioBlobUrl" type="audio/mp3">
                     </audio>
                 </div>
