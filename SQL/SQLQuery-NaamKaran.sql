@@ -67,13 +67,19 @@
 --INSERT INTO AudioTraits (Language, Locale, Gender, VoiceName)
 --VALUES ('English (United States)', 'en-US', 'Male', 'en-US-BrandonNeural');
 
+--INSERT INTO AudioTraits (Language, Locale, Gender, VoiceName)
+--VALUES ('Hindi (India)', 'hi-IN', 'Male', 'hi-IN-MadhurNeural');
+
+--INSERT INTO AudioTraits (Language, Locale, Gender, VoiceName)
+--VALUES ('Hindi (India)', 'hi-IN', 'Female', 'hi-IN-SwaraNeural');
+
 --INSERT INTO Users (UserId, LastName, FirstName, MiddleName, Pswd, NameId, Gender, Nationality, Language, TraitId, UseChoice, Pace)
 --VALUES ('u791553', 'Rath', 'Prabin', 'Kumar', 'password', 0, 'Male', 'India', 'English', 3000, 'Y', 'F');
 
-SELECT * FROM Audio
-SELECT * FROM Names
-SELECT * FROM AudioTraits
-SELECT * FROM Users
+--SELECT * FROM Audio
+--SELECT * FROM Names
+--SELECT * FROM AudioTraits
+--SELECT * FROM Users
 
 --SELECT IDENT_CURRENT('Names')
 

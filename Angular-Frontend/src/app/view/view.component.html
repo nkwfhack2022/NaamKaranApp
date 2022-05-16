@@ -18,6 +18,7 @@
       <div class="col-8">
         <div class="input-group">
           <input
+            (keyup)="get_similar_names()"
             placeholder="Enter Name!"
             type="text"
             [(ngModel)]="typedName"
@@ -60,6 +61,7 @@
           >
             <div class="col-2 py-2" style="border-right: 2px solid #ced4da">
               <img
+              (click)="playRecord()"
                 class="btn-primary"
                 style="cursor: pointer; border-radius: 10px"
                 src="./.././../assets/play.png"

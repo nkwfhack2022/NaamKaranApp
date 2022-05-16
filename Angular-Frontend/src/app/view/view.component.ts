@@ -82,6 +82,16 @@ export class ViewComponent implements OnInit {
     // this.audioObj.play();
   }
 
+  get_similar_names(){
+    this.suggestedNames = []
+    this.recordApi.getSimilarNames({"GivenName": this.typedName}).subscribe((res)=>{
+      for(let i =0;i<res.result.length;i++)
+      {
+        this.suggestedNames.push({id: i, name:res.result[i][1], phonetic:""})
+      }
+    })
+  }
+
   fetchStandardPronounciation() {
     const traitId = "'" + window.localStorage.getItem("traitId") + "'";
     this.recordApi.getTrait({"TraitId": traitId, "option": "select"}).subscribe((res)=>{

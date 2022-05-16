@@ -10,6 +10,7 @@ export class RecordApiService {
   private recordUrl:string = "https://naamkaran-db-gateway.azurewebsites.net/insert_audio";
   private getRecordUrl:string = "https://naamkaran-db-gateway.azurewebsites.net/get_audio";
   private ttsUrl:string = "https://naamkaran-py-backend.azurewebsites.net/tts_call";
+  private simUrl:string = "https://naamkaran-py-backend.azurewebsites.net/similar_names";
   private traitUrl:string = "https://naamkaran-db-gateway.azurewebsites.net/get_audio_traits";
   constructor(private http: HttpClient) { }
   insertAudio(data:any):Observable<any> {
@@ -23,6 +24,9 @@ export class RecordApiService {
   }
   getTrait(data:any):Observable<any> {
     return this.http.post<any>(this.traitUrl, data).pipe((res)=>res);
+  }
+  getSimilarNames(data:any):Observable<any> {
+    return this.http.post<any>(this.simUrl, data).pipe((res)=>res);
   }
   _getRecordId(): Observable<string> {
     return this.recordId.asObservable();
