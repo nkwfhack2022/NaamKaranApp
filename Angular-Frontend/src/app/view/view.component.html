@@ -179,18 +179,25 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content" style="border-radius: 30px;">
           <div class="modal-header" style="word-break: break-all;">
-            <h5 class="modal-title" id="exampleModalLongTitle">Record Your Name</h5>
+            <h5 class="modal-title" id="exampleModalLongTitle">Standard Pronounciation</h5>
             <button class="close" type="button" (click)="closeSTDPopUp()" data-dismiss="modal" aria-label="close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
             <div class="modal-body">
                 <div class="row ">
-                    <audio controls controlsList="nodownload noplaybackrate">
+                    <audio *ngIf="stdAudioUrl" controls controlsList="nodownload noplaybackrate">
                         <source [src]="stdAudioUrl" type="audio/mp3">
                     </audio>
                 </div>
             </div>
+            <div class="modal-footer">
+              <div class="row w-100">
+                  <div class="col justify-content-center text-center">
+                      <button (click)="saveAudio()" type="button" class="btn btn-primary m-2 " data-dismiss="modal">Save</button>
+                  </div>
+              </div>
+          </div>
         </div>
     </div>
 

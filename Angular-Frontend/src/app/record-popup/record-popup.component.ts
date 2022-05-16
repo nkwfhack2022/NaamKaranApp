@@ -23,7 +23,9 @@ export class RecordPopupComponent implements OnInit {
   audioTimeSecond:any;
   playAudio: Boolean = false;
   recordPayLoad:any = {
-    AudioB64: ""
+    AudioB64: "",
+    AudioType: "'R'", 
+    BlobAddress:""
   }
   constructor(
     private ref: ChangeDetectorRef,
@@ -131,7 +133,8 @@ export class RecordPopupComponent implements OnInit {
     const blob = new Blob([this.audioBlob], { type: 'audio/mp3' });
     const base64String = await this.audioRecordingService.convertBlobToBase64(blob);
     this.recordPayLoad.AudioB64 = "'" + base64String +  "'";
-    this.recordApi.insertRecord(this.recordPayLoad).subscribe((res:any) =>{
+    this.recordPayLoad.BlobAddress = "'" + this.audioBlobUrl +  "'";
+    this.recordApi.insertAudio(this.recordPayLoad).subscribe((res:any) =>{
       this.recordApi.assignRecordId(res.Id);
       
     })

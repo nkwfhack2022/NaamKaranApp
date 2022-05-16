@@ -33,8 +33,8 @@ export class ViewComponent implements OnInit {
   ttID:any ={};
   recordId:any=1003;
   isPlaying:any=false;
-  stdAudioUrl:any="https://wfhck2022nkstorage1.blob.core.windows.net/audiofiles/Atchyutha.mp3";
-  stdDisplay:any=false;
+  stdAudioUrl:any ;
+  stdDisplay:any="none";
   constructor(
     private audioRecordingService: AudioRecordingService,
     private recordApi: RecordApiService,
@@ -83,25 +83,19 @@ export class ViewComponent implements OnInit {
   }
 
   fetchStandardPronounciation() {
-    console.log(this.typedName)
-    this.stdDisplay = true;
     const traitId = "'" + window.localStorage.getItem("traitId") + "'";
     this.recordApi.getTrait({"TraitId": traitId, "option": "select"}).subscribe((res)=>{
       console.log(res)
+      this.ttsPayload.VoiceName = res.result[0][4];
     })
-    // this.recordApi.getTTS({"AudioId": this.recordId, "option": "select"}).subscribe((res:any)=>{
-    //   console.log(res.result[0][1].split("'")[1])
-    //   const audioBlob = this.audioRecordingService.convertBase64TobBob(res.result[0][1].split("'")[1]);
-    //   const blob = new Blob([audioBlob], { type: 'audio/mp3' });
-
-    //   this.audioObj.src = window.URL.createObjectURL(blob);
-    //   this.audioObj.load();
-    //   this.audioObj.play();
-    //   console.log(this.audioObj.duration ,this.audioObj.currentTime)
-    //   if(this.audioObj.duration == this.audioObj.currentTime) {
-    //     this.isPlaying = false;
-    //   }
-    // })
+    this.ttsPayload.PrefName = this.typedName;
+    console.log(this.ttsPayload)
+    this.recordApi.getTTS(this.ttsPayload).subscribe((res)=>{
+      
+      this.stdAudioUrl = res.blob_address;
+      this.stdDisplay = "block";
+      
+    })
 
    /*call tts
       global templist
@@ -109,7 +103,27 @@ export class ViewComponent implements OnInit {
    */
   }
   closeSTDPopUp(){
-    this.stdDisplay = false;
+    this.stdDisplay ="none";
+  }
+
+  saveAudio() {
+    /*
+    payload = {"AudioType": "'A'", 
+#            "AudioB64": "''", 
+#            "BlobAddress":"'https://wfhck2022nkstorage1.blob.core.windows.net/audiofiles/Atchyutha.mp3'"
+#           }
+    */
+
+    const payload = {
+      AudioType: "'A'",
+      AudioB64: "''",
+      BlobAddress: "'" + this.stdAudioUrl + "'"
+    }
+    this.recordApi.insertAudio(payload).subscribe((res:any) =>{
+      this.recordApi.assignRecordId(res.Id);
+      
+    })
+    this.closeSTDPopUp();
   }
 
 }
