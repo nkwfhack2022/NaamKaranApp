@@ -1,9 +1,11 @@
 from flask import Flask, request
 from flask_restful import Api, Resource
 from SpeechSynth import text_synthesize_upload
+from TextSimilarity import find_similar_names
 import random
 import string
 import requests
+import json
 
 base_url = "https://naamkaran-db-gateway.azurewebsites.net"
 # base_url = "http://127.0.0.1:5000"
@@ -33,6 +35,25 @@ class tts_call(Resource):
             data["exception"] = str(e)
         return data
 api.add_resource(tts_call,'/tts_call')
+
+class similar_names(Resource):
+    def post(self):
+        data = {"status": "To Process"}
+        try:
+            json_data = request.get_json()
+            given_name = json_data["GivenName"]
+            url = base_url + '/get_name'
+            payload = {"option": "all"}
+            x = requests.post(url, json = payload)
+            name_list = json.loads(x.text)["result"]
+            same_names = find_similar_names(given_name, name_list)
+            data["status"] = "Processed"
+            data["result"] = same_names
+        except Exception as e:
+            data["status"] = "Failed"
+            data["exception"] = str(e)
+        return data
+api.add_resource(similar_names,'/similar_names')
 
 class default(Resource):
 	def get(self):

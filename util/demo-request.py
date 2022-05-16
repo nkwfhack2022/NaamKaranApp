@@ -32,8 +32,8 @@ base_url = "https://naamkaran-py-backend.azurewebsites.net"
 # print(x.text)
 
 # url = base_url + '/insert_name'
-# payload = {"PrefName": "'Asween'",
-#            "AudioId": 1001,
+# payload = {"PrefName": "'Peyush'",
+#            "AudioId": 1003,
 #           }
 # x = requests.post(url, json = payload)
 # print(x.text)
@@ -76,9 +76,14 @@ base_url = "https://naamkaran-py-backend.azurewebsites.net"
 # x = requests.post(url, json = payload)
 # print(x.text)
 
-url = base_url + '/tts_call'
-payload = {"PrefName": "Abhishek", 
-           "VoiceName": "en-IN-PrabhatNeural",
-          }
+# url = base_url + '/tts_call'
+# payload = {"PrefName": "Abhishek", 
+#            "VoiceName": "en-IN-PrabhatNeural",
+#           }
+# x = requests.post(url, json = payload)
+# print(x.text)
+
+url = base_url + '/similar_names'
+payload = {"GivenName": "Asween"}
 x = requests.post(url, json = payload)
 print(x.text)

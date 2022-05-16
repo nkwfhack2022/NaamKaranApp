@@ -95,3 +95,7 @@ SELECT * FROM Users
 -- Delete Columns
 
 --DELETE FROM Users WHERE UserId=4002;
+
+--DELETE FROM Users;
+--DELETE FROM AudioTraits;
+--DELETE FROM Audio;
