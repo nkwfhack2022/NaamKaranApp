@@ -1,4 +1,0 @@
-textdistance=4.2.2
-azure-cognitiveservices-speech=1.21.0\
-pyyaml
-azure-storage-blob

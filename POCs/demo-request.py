@@ -2,7 +2,8 @@ import requests
 import json
 
 # base_url = "https://naamkaran-db-gateway.azurewebsites.net"
-base_url = "http://127.0.0.1:5000"
+base_url = "https://naamkaran-py-backend.azurewebsites.net"
+# base_url = "http://127.0.0.1:5000"
 
 # url = base_url + '/insert_user'
 # payload = {"UserId": "'u791554'",
@@ -10,7 +11,7 @@ base_url = "http://127.0.0.1:5000"
 #            "FirstName": "'Prabeen'", 
 #            "MiddleName": "''", 
 #            "Pswd": "'password'", 
-#            "NameId": 2000, 
+#            "NameId": 0, 
 #            "Gender": "'Male'", 
 #            "Nationality": "'India'", 
 #            "Language": "'English'", 
@@ -31,9 +32,9 @@ base_url = "http://127.0.0.1:5000"
 # print(x.text)
 
 # url = base_url + '/insert_name'
-# payload = {"PrefName": "'Asween'",
-#            "AudioId": 1001,
-#            "AudioType": "'R'"}
+# payload = {"PrefName": "'Peyush'",
+#            "AudioId": 1003,
+#           }
 # x = requests.post(url, json = payload)
 # print(x.text)
 
@@ -48,12 +49,15 @@ base_url = "http://127.0.0.1:5000"
 # print(x.text)
 
 # url = base_url + '/insert_audio'
-# payload = {"AudioB64": "'Good World'"}
+# payload = {"AudioType": "'A'", 
+#            "AudioB64": "''", 
+#            "BlobAddress":"'https://wfhck2022nkstorage1.blob.core.windows.net/audiofiles/Atchyutha.mp3'"
+#           }
 # x = requests.post(url, json = payload)
 # print(x.text)
 
 # url = base_url + '/get_audio'
-# payload = {"AudioId": 1001, "option": "select"}
+# payload = {"AudioId": 1002, "option": "select"}
 # x = requests.post(url, json = payload)
 # print(x.text)
 
@@ -71,3 +75,15 @@ base_url = "http://127.0.0.1:5000"
 # payload = {"option": "all"}
 # x = requests.post(url, json = payload)
 # print(x.text)
+
+# url = base_url + '/tts_call'
+# payload = {"PrefName": "Abhishek", 
+#            "VoiceName": "en-IN-PrabhatNeural",
+#           }
+# x = requests.post(url, json = payload)
+# print(x.text)
+
+url = base_url + '/similar_names'
+payload = {"GivenName": "Asween"}
+x = requests.post(url, json = payload)
+print(x.text)

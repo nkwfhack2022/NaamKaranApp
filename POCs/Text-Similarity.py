@@ -12,6 +12,7 @@ similar_names = []
 for name in name_list:
     simi_met = e.matchName(given_name, name)
 
-    if simi_met >= 0.75:
+    if simi_met >= 0.80:
         similar_names.append(name)
+        
 print(similar_names)

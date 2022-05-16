@@ -10,14 +10,15 @@
 
 --CREATE TABLE Audio (
 --    AudioId int NOT NULL PRIMARY KEY IDENTITY(1000,1),
---    AudioB64 varbinary(max) NOT NULL
+--    AudioType char NOT NULL,
+--    AudioB64 varbinary(max),
+--    BlobAddress varchar(max)
 --);
 
 --CREATE TABLE Names (
 --    NameId int NOT NULL PRIMARY KEY IDENTITY(2000,1),
 --    PrefName varchar(255) NOT NULL,
---    AudioId int NOT NULL FOREIGN KEY REFERENCES Audio(AudioId) ON DELETE CASCADE ON UPDATE CASCADE,
---    AudioType char
+--    AudioId int NOT NULL FOREIGN KEY REFERENCES Audio(AudioId) ON DELETE CASCADE ON UPDATE CASCADE    
 --);
 
 --CREATE TABLE AudioTraits (
@@ -34,7 +35,7 @@
 --    FirstName varchar(255) NOT NULL,
 --    MiddleName varchar(255),
 --    Pswd varchar(255) NOT NULL,
---    NameId int FOREIGN KEY REFERENCES Names(NameId),
+--    NameId int,
 --    Gender varchar(10) NOT NULL,
 --    Nationality varchar(50) NOT NULL,
 --    Language varchar(50) NOT NULL,
@@ -45,11 +46,14 @@
 
 -- Test DB Features
 
---INSERT INTO Audio (AudioB64)
---VALUES (CONVERT(varbinary(max), 'Hello_Music'));
+--INSERT INTO Audio (AudioType, AudioB64)
+--VALUES ('M', CONVERT(varbinary(max), 'binary audio encoding in b64'));
 
---INSERT INTO Names (PrefName, AudioId, AudioType)
---VALUES ('Prabin', 1000, 'A');
+--INSERT INTO Audio (AudioType, BlobAddress)
+--VALUES ('A', 'blob storate https download link');
+
+--INSERT INTO Names (PrefName, AudioId)
+--VALUES ('Prabin', 1000);
 
 --INSERT INTO AudioTraits (Language, Locale, Gender, VoiceName)
 --VALUES ('English (India)', 'en-IN', 'Male', 'en-IN-PrabhatNeural');
@@ -57,8 +61,14 @@
 --INSERT INTO AudioTraits (Language, Locale, Gender, VoiceName)
 --VALUES ('English (India)', 'en-IN', 'Female', 'en-IN-NeerjaNeural');
 
+--INSERT INTO AudioTraits (Language, Locale, Gender, VoiceName)
+--VALUES ('English (United States)', 'en-US', 'Female', 'en-US-AmberNeural');
+
+--INSERT INTO AudioTraits (Language, Locale, Gender, VoiceName)
+--VALUES ('English (United States)', 'en-US', 'Male', 'en-US-BrandonNeural');
+
 --INSERT INTO Users (UserId, LastName, FirstName, MiddleName, Pswd, NameId, Gender, Nationality, Language, TraitId, UseChoice, Pace)
---VALUES ('u791553', 'Rath', 'Prabin', 'Kumar', 'password', 2000, 'Male', 'India', 'English', 3000, 'Y', 'F');
+--VALUES ('u791553', 'Rath', 'Prabin', 'Kumar', 'password', 0, 'Male', 'India', 'English', 3000, 'Y', 'F');
 
 SELECT * FROM Audio
 SELECT * FROM Names
@@ -85,3 +95,7 @@ SELECT * FROM Users
 -- Delete Columns
 
 --DELETE FROM Users WHERE UserId=4002;
+
+--DELETE FROM Users;
+--DELETE FROM AudioTraits;
+--DELETE FROM Audio;

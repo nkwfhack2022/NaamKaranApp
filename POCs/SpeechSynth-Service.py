@@ -1,5 +1,5 @@
 import base64
-import os
+import time
 from blob_store_service import BlobStoreService
 try:
     import azure.cognitiveservices.speech as speechsdk
@@ -39,8 +39,7 @@ class SpeechSynth:
         speech_synthesizer = speechsdk.SpeechSynthesizer(speech_config=self.speech_config, audio_config=self.file_config)
         
         speech_synthesis_result = speech_synthesizer.speak_text_async(pref_name).get()
-        print(speech_synthesis_result)
-
+       
         # validation - logs
         if speech_synthesis_result.reason == speechsdk.ResultReason.SynthesizingAudioCompleted:
             print("Speech synthesized for text [{}], and the audio was saved to [{}]".format(pref_name, self.file_name))
@@ -89,15 +88,29 @@ class SpeechSynth:
             print(len(stream))
             print(type(stream))
         return stream
-        
-
+    
     def decode_b64_mp3(self,stream:bytes):
         pass
-        
+
+## MAIN
+def text_synthesize_upload(voicename:str, pref_name:str, filename:str):
+            
+    file_path = config.LOCAL_AUDIO_PATH+filename+'.mp3'
+    s = SpeechSynth(voicename, file_path)
+    s.synthesize_text_to_audio_file(pref_name)
+    time.sleep(1)
+    store = BlobStoreService()
+    store.upload_service(filename)
+    # print(store.list_files_in_blobstore())
+
+    return r"https://wfhck2022nkstorage1.blob.core.windows.net/audiofiles/"+filename+".mp3"
+
+print(text_synthesize_upload('en-IN-PrabhatNeural','Sobhapati', 'Sobhapati'))
+
 
 ### TESTING
 # audio file test
-# name = "Atchyutha"
+# name = "Prabina"
 # filepath = config.LOCAL_AUDIO_PATH+name+'.mp3'
 # filename = name+'.mp3'
 # s = SpeechSynth('en-IN-PrabhatNeural',filepath)
