@@ -24,7 +24,7 @@ class BlobStoreService:
                 blob_client = container_client.get_blob_client(file.name)
                 print(file.path)
                 with open(file.path,"rb") as data:
-                    blob_client.upload_blob(data)
+                    blob_client.upload_blob(data, overwrite=True)
                     print('uploaded to blob storage: ',file.path)
                     os.remove(file)
         except Exception as ex:
@@ -64,4 +64,13 @@ class BlobStoreService:
         with open(download_path,"wb") as download_file:
             download_file.write(blob_client.download_blob().readall())
         
+    def delete_blob_service(self, file_name):
+        blob_service_client = BlobServiceClient.from_connection_string(conn_str=config.AZURE_STORAGE_CONNECTION_STRING)
+        blob_client = blob_service_client.get_container_client(config.AUDIO_CONTAINER_NAME)
+
+        for blob in blob_client.list_blobs():
+            if(file_name in blob.name):
+                blob_client.delete_blob(blob.name,delete_snapshots='include')
+        
+        print('deleted: ',file_name)
         
