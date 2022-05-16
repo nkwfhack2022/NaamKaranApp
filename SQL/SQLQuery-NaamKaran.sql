@@ -76,10 +76,10 @@
 --INSERT INTO Users (UserId, LastName, FirstName, MiddleName, Pswd, NameId, Gender, Nationality, Language, TraitId, UseChoice, Pace)
 --VALUES ('u791553', 'Rath', 'Prabin', 'Kumar', 'password', 0, 'Male', 'India', 'English', 3000, 'Y', 'F');
 
---SELECT * FROM Audio
---SELECT * FROM Names
---SELECT * FROM AudioTraits
---SELECT * FROM Users
+SELECT * FROM Audio
+SELECT * FROM Names
+SELECT * FROM AudioTraits
+SELECT * FROM Users
 
 --SELECT IDENT_CURRENT('Names')
 
