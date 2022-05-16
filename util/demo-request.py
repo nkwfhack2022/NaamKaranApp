@@ -1,8 +1,8 @@
 import requests
 import json
 
-base_url = "https://naamkaran-db-gateway.azurewebsites.net"
-# base_url = "http://127.0.0.1:5000"
+# base_url = "https://naamkaran-db-gateway.azurewebsites.net"
+base_url = "http://127.0.0.1:5000"
 
 # url = base_url + '/insert_user'
 # payload = {"UserId": "'u791554'",
@@ -10,7 +10,7 @@ base_url = "https://naamkaran-db-gateway.azurewebsites.net"
 #            "FirstName": "'Prabeen'", 
 #            "MiddleName": "''", 
 #            "Pswd": "'password'", 
-#            "NameId": 2000, 
+#            "NameId": 0, 
 #            "Gender": "'Male'", 
 #            "Nationality": "'India'", 
 #            "Language": "'English'", 
@@ -33,7 +33,7 @@ base_url = "https://naamkaran-db-gateway.azurewebsites.net"
 # url = base_url + '/insert_name'
 # payload = {"PrefName": "'Asween'",
 #            "AudioId": 1001,
-#            "AudioType": "'R'"}
+#           }
 # x = requests.post(url, json = payload)
 # print(x.text)
 
@@ -48,14 +48,17 @@ base_url = "https://naamkaran-db-gateway.azurewebsites.net"
 # print(x.text)
 
 # url = base_url + '/insert_audio'
-# payload = {"AudioB64": "'Good World'"}
+# payload = {"AudioType": "'A'", 
+#            "AudioB64": "''", 
+#            "BlobAddress":"'https://wfhck2022nkstorage1.blob.core.windows.net/audiofiles/Atchyutha.mp3'"
+#           }
 # x = requests.post(url, json = payload)
 # print(x.text)
 
-url = base_url + '/get_audio'
-payload = {"AudioId": 1005, "option": "select"}
-x = requests.post(url, json = payload)
-print(x.text)
+# url = base_url + '/get_audio'
+# payload = {"AudioId": 1005, "option": "select"}
+# x = requests.post(url, json = payload)
+# print(x.text)
 
 # url = base_url + '/get_audio'
 # payload = {"option": "all"}

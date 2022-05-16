@@ -73,8 +73,8 @@ class insert_name(Resource):
         data = {"status": "To Process"}
         try:
             json_data = request.get_json()
-            input_json = {"query": "INSERT INTO Names (PrefName, AudioId, AudioType) VALUES ({0}, {1}, {2})".format(
-                json_data["PrefName"], json_data["AudioId"], json_data["AudioType"]),
+            input_json = {"query": "INSERT INTO Names (PrefName, AudioId) VALUES ({0}, {1})".format(
+                json_data["PrefName"], json_data["AudioId"]),
                 "is_resp_expected": False
             }
             print(input_json["query"])
@@ -96,7 +96,7 @@ class get_name(Resource):
             json_data = request.get_json()
             opt = json_data["option"]
             if opt == "select":
-                input_json = {"query": "SELECT NameId, PrefName, AudioId, AudioType FROM Names WHERE NameId={0}".format(
+                input_json = {"query": "SELECT NameId, PrefName, AudioId FROM Names WHERE NameId={0}".format(
                     json_data["NameId"]), 
                     "is_resp_expected": True
                 }
@@ -120,8 +120,8 @@ class insert_audio(Resource):
         data = {"status": "To Process"}
         try:
             json_data = request.get_json()
-            input_json = {"query": "INSERT INTO Audio (AudioB64) VALUES (CONVERT(varbinary(max), {0}))".format(
-                json_data["AudioB64"]),
+            input_json = {"query": "INSERT INTO Audio (AudioType, AudioB64, BlobAddress) VALUES ({0}, CONVERT(varbinary(max), {1}), {2})".format(
+                json_data["AudioType"], json_data["AudioB64"], json_data["BlobAddress"]),
                 "is_resp_expected": False
             }
             print(input_json["query"])
@@ -143,7 +143,7 @@ class get_audio(Resource):
             json_data = request.get_json()
             opt = json_data["option"]
             if opt == "select":
-                input_json = {"query": "SELECT AudioId, AudioB64 FROM Audio WHERE AudioId={0}".format(
+                input_json = {"query": "SELECT AudioId, AudioType, AudioB64, BlobAddress FROM Audio WHERE AudioId={0}".format(
                     json_data["AudioId"]), 
                     "is_resp_expected": True
                 }

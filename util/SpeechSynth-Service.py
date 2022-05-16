@@ -1,5 +1,5 @@
 import base64
-import os
+import time
 from blob_store_service import BlobStoreService
 try:
     import azure.cognitiveservices.speech as speechsdk
@@ -98,16 +98,15 @@ def text_synthesize_upload(voicename:str, pref_name:str, filename:str):
     file_path = config.LOCAL_AUDIO_PATH+filename+'.mp3'
     s = SpeechSynth(voicename, file_path)
     s.synthesize_text_to_audio_file(pref_name)
-
+    time.sleep(1)
     store = BlobStoreService()
     store.upload_service(filename)
-    print(store.list_files_in_blobstore())
+    # print(store.list_files_in_blobstore())
 
     return r"https://wfhck2022nkstorage1.blob.core.windows.net/audiofiles/"+filename+".mp3"
 
-print(text_synthesize_upload('en-IN-PrabhatNeural','Reggie', 'reg-1'))
+print(text_synthesize_upload('en-IN-PrabhatNeural','Sobhapati', 'Sobhapati'))
 
-        
 
 ### TESTING
 # audio file test
