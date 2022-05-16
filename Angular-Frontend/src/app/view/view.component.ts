@@ -16,16 +16,6 @@ export class ViewComponent implements OnInit {
   typedName: string = "";
   suggestedNames: any[] = []
   tempNames:any = [];
-  //  {id:1, name:"Deepak", phonetic:"dee-pak"},
-  //  {id:2, name:"Dipak", phonetic:"di-pak"},
-  //  {id:3, name:"Deepok", phonetic:"dee-pok"},
-  //  {id:4, name:"Deepaak", phonetic:"dee-paak"},
-  //  {id:5, name:"Diipak", phonetic:"dii-pak"},
-  //  {id:5, name:"Diipak", phonetic:"dii-pak"},
-  //  {id:5, name:"Diipak", phonetic:"dii-pak"},
-  //  {id:5, name:"Diipak", phonetic:"dii-pak"},
-  //  {id:5, name:"Diipak", phonetic:"dii-pak"},
-  // ];
   ttsPayload:any = {
     PrefName: "", 
     VoiceName: "",
@@ -35,6 +25,7 @@ export class ViewComponent implements OnInit {
   isPlaying:any=false;
   stdAudioUrl:any ;
   stdDisplay:any="none";
+  isSimilarTextpaly:any = false;
   constructor(
     private audioRecordingService: AudioRecordingService,
     private recordApi: RecordApiService,
@@ -87,7 +78,7 @@ export class ViewComponent implements OnInit {
     this.recordApi.getSimilarNames({"GivenName": this.typedName}).subscribe((res)=>{
       for(let i =0;i<res.result.length;i++)
       {
-        this.suggestedNames.push({id: i, name:res.result[i][1], phonetic:""})
+        this.suggestedNames.push({id: i, name:res.result[i][1], phonetic:"", isPlay:false})
       }
     })
   }
@@ -134,6 +125,24 @@ export class ViewComponent implements OnInit {
       
     })
     this.closeSTDPopUp();
+  }
+  
+  playAudio(id:any){
+    const traitId = "'" + window.localStorage.getItem("traitId") + "'";
+    this.recordApi.getTrait({"TraitId": traitId, "option": "select"}).subscribe((res)=>{
+      console.log(res)
+      this.ttsPayload.VoiceName = res.result[0][4];
+    })
+    this.ttsPayload.PrefName = this.suggestedNames[id].name;
+    console.log(this.ttsPayload)
+    this.recordApi.getTTS(this.ttsPayload).subscribe((res)=>{
+      const audio = new  Audio();
+      audio.src =  res.blob_address;
+      audio.load();
+      this.suggestedNames[id].isPlay = true;
+      audio.play();
+      
+    })
   }
 
 }
